@@ -1,0 +1,28 @@
+<% if flash[:error] %>
+  <p><%= flash[:error] %></p>
+<% end %>
+
+<%= form_for(@wallet, url: wallet_path(wallet_type: @wallet.wallet_type_present.downcase), class: 'w-50 p-3') do |f| %>
+  <div>
+    <p><%= @wallet.currency.id %></p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, 'Type description for score'  %>
+    <%= f.text_field(:description, class: 'form-text text-muted', value: @wallet.description ) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :pin, 'Please put pin code for score' %>
+    <%= f.password_field(:pin, class: 'form-control', maxlength: 4, minlength: 4) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :pin_new, 'Please put a new pin code for score, this field can''t be empty if any update' %>
+    <%= f.password_field(:pin_new, class: 'form-control', maxlength: 4) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit(class: 'btn btn-success') %>
+  </div>
+<% end %>

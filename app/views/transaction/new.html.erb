@@ -1,0 +1,11 @@
+<%= form_tag :transaction_index, class: 'form-inline',  method: :post do %>
+  <%= hidden_field_tag :recipient_type, @recipient_type %>
+
+  <%= select_tag :from_score, options_for_select(@from_wallets) %>
+  <%= select_tag :to_score, options_for_select(@to_wallets) %>
+  </br>
+  <%= number_field_tag :amount %>
+  </br>
+  <%= password_field_tag :pin_code, class: 'form-control', maxlength: 4, minlength: 4 %>
+  <%= submit_tag 'Send' %>
+<% end %>

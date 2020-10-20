@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope='col'>Currency</th>
+      <th scope='col'>Wallet type</th>
+      <th scope='col'>Description</th>
+      <th scope='col'>Number</th>
+      <th scope='col'>Balance</th>
+      <th scope='col'>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%= @wallet.currency.id %></td>
+    <td><%= @wallet.wallet_type_present %></td>
+    <td><%= @wallet.description %></td>
+    <td><%= @wallet.number %></td>
+    <td><%= @wallet.balance %></td>
+    <td><%= link_to 'Edit', edit_wallet_path(id: @wallet.id) %></td>
+  </tr>
+  </tbody>
+</table>
+
+<table class="table">
+
+</table>
