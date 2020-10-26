@@ -20,7 +20,34 @@
   </tr>
   </tbody>
 </table>
-
+<p class="text-center">Transaction</p>
 <table class="table">
-
+  <thead>
+    <tr>
+      <th scope=col>Sender Score</th>
+      <th scope=col>Recipient Score</th>
+      <th scope=col>Operation</th>
+      <th scope=col>Amount</th>
+      <th scope=col>Currency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @wallet.all_transactions.each do |record| %>
+      <tr>
+        <% if @wallet.number == record.sender.number %>
+          <td><%= record.sender.number %></td>
+        <% else %>
+          <td><%= link_to record.sender.number, wallet_path(record.sender.id) %></td>
+        <% end %>
+        <% if @wallet.number == record.recipient.number %>
+          <td><%= record.recipient.number %></td>
+        <% else %>
+          <td><%= link_to record.recipient.number, wallet_path(record.recipient.id) %></td>
+        <% end %>
+        <td><%= record.operation.humanize %></td>
+        <td><%= record.charge_transaction.amount %> </td>
+        <td><%= record.charge_transaction.currency.id %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

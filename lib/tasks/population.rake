@@ -5,6 +5,8 @@ namespace :population do
   task generate_wallet_list: :environment do
     wallets = WalletAvailable.all.map(&:number).uniq
     Currency.all.each do |currency|
+      s = ScoreGenerator.new(currency).call
+      Atm.create!(currency: currency, address: 'Test address' + currency.id, number: IbanNumberGenerator.perform(SystemSetting.first, s, currency))
       1000.times do
         data = ScoreGenerator.new(currency)
         score = data.call

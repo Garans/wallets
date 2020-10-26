@@ -10,9 +10,17 @@ class WalletController < ApplicationController
 
   def edit; end
 
+  def balance
+    wallet = Wallet.find_wallet_by_in_crypt(params[:wallet_id])
+    render json: { wallet: wallet.number, balance: wallet.balance, currency_sym: wallet.currency.symbol_icon }
+  end
+
   def create
     @wallet = CreateScore.new(wallet_by_type.class_model.new, current_user, wallet_params).call
     redirect_to wallet_index_path
+  rescue StandardError => e
+    flash[:error] = e.message
+    render :new
   end
 
   def update

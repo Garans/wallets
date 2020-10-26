@@ -32,7 +32,7 @@ module Builders
     end
 
     def currency
-      transaction.currency = send("#{parent.present? ? 'sender' : 'recipient'}_wallet").currency
+      transaction.currency = send("#{from_sender? ? 'sender' : 'recipient'}_wallet").currency
     end
 
     def currency_converters_info

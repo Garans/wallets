@@ -1,11 +1,32 @@
-<%= form_tag :transaction_index, class: 'form-inline',  method: :post do %>
+<% if flash[:error] %>
+  <p><%= flash[:error] %></p>
+<% end %>
+<%= form_tag :transaction_index,  method: :post do %>
   <%= hidden_field_tag :recipient_type, @recipient_type %>
 
-  <%= select_tag :from_score, options_for_select(@from_wallets) %>
-  <%= select_tag :to_score, options_for_select(@to_wallets) %>
-  </br>
-  <%= number_field_tag :amount %>
-  </br>
-  <%= password_field_tag :pin_code, class: 'form-control', maxlength: 4, minlength: 4 %>
-  <%= submit_tag 'Send' %>
+  <div class="form-group">
+    <%= label_tag :from_score, 'From wallet' %>
+      <div class="form-inline">
+        <%= select_tag :from_score, options_for_select(@from_wallets, @selected), class: 'custom-select' %>
+        <div class="input-group-append">
+          <label class="input-group-text" for="from_score" id="label_balance"><%= @selected_balance %></label>
+        </div>
+      </div>
+  </div>
+  <div class="form-group">
+    <%= label_tag :to_score, 'To wallet' %>
+    <%= select_tag :to_score, options_for_select(@to_wallets), class: 'custom-select d-block w-100' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :amount, 'Amount for transfer' %>
+    <%= number_field_tag :amount, 0, class: 'form-control', placeholder: 'Amount for transfer' %>
+  </div>
+  <div class="from-group">
+    <%= label_tag :pin_code, 'Pin code for score' %>
+    <%= password_field_tag :pin_code, nil, class: 'form-control', placeholder: 'Pin code', maxlength: 4, minlength: 4 %>
+  </div>
+  <div class="form-group" style="margin-left: 400px; margin-right: 400px">
+    <br>
+    <%= submit_tag 'Send', class: 'btn btn-primary btn-block' %>
+  </div>
 <% end %>

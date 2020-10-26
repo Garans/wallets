@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_19_101623) do
+ActiveRecord::Schema.define(version: 2020_10_26_092606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_10_19_101623) do
     t.string "recipient_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "operation", default: 0
     t.index ["transaction_id"], name: "index_transaction_send_infos_on_transaction_id"
   end
 

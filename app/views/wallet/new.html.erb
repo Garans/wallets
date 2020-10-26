@@ -1,15 +1,13 @@
 <%= form_for(@wallet, url: wallet_index_path(wallet_type: params[:wallet_type])) do |f| %>
-<!--  <select class="form-control form-control-lg">-->
-<!--    <option>Large select</option>-->
-<!--  </select>-->
-  <div class="form-group">
-    <%= f.label :currency_id, 'Please select currency for score' %>
-    <%= f.select(:currency_id, @currencies, class: 'form-control form-control-lg') %>
+  <div class="input-group mb-3 center">
+    <p>Please select currency for score</p>
+    <br>
+    <%= f.select(:currency_id, @currencies, class: 'custom-select d-block w-100') %>
   </div>
 
   <div class="form-group">
     <%= f.label :description, 'Type description for score' %>
-    <%= f.text_field(:description, class: 'form-text text-muted') %>
+    <%= f.text_field(:description, class: 'form-control') %>
   </div>
 
   <div class="form-group">

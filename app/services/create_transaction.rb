@@ -17,7 +17,7 @@ class CreateTransaction
       @transaction.save!
       send_info = TransactionSendInfo.new(
         recipient_id: recipient_score.id, recipient_type: recipient_type,
-        charge_transaction: @transaction
+        charge_transaction: @transaction, operation: operation
       )
 
       if from_score.present?
@@ -62,11 +62,15 @@ class CreateTransaction
   end
 
   def sender_type
-    from_score.type
+    Wallet.name
   end
 
   def recipient_type
-    params[:recipient_type] == :wallet ? recipient_score.type : params[:recipient_type].to_s.classify
+    params[:recipient_type] == :wallet ? Wallet.name : params[:recipient_type].to_s.classify
+  end
+
+  def operation
+    params[:operation_type] == Transaction.operation_types[:charge] ? :out_come : :in_come
   end
 
   def builder

@@ -6,7 +6,7 @@ class CalculateCurrencyConverter
   end
 
   def call(amount)
-    config.course * amount
+    (config.course * amount).round(2)
   end
 
   private

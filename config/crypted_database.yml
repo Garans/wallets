@@ -25,4 +25,7 @@ test:
 
 production:
   <<: *default
-  database: interview_crypted_production
+  database: <%= ENV['POSTGRES_CRYPT_DB'] %>
+  username: <%= ENV['POSTGRES_CRYPT_USER'] %>
+  password: <%= ENV['POSTGRES_CRYPT_PASSWORD']  %>
+  host: <%= ENV['POSTGRES_CRYPT_HOST'] %>

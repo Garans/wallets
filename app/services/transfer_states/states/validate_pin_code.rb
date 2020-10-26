@@ -8,7 +8,7 @@ module TransferStates
       def valid?
         @validator = PinValidator.new
         @validator.record = from_score
-        @validator.value = params[:pin_code]
+        @validator.pin = params[:pin_code]
         @validator.valid?
       end
 

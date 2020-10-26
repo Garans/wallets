@@ -6,10 +6,7 @@ class Wallet < ApplicationRecord
 
   has_and_belongs_to_many :users
   belongs_to :currency
-  has_and_belongs_to_many :charge_transactions, join_table: :transactions_wallets, class_name: 'Transaction'
-
-  has_many :out_come_transactions, class_name: 'Transaction', foreign_key: 'sender_wallet_id'
-  has_many :in_come_transactions, class_name: 'Transaction', foreign_key: 'recipient_wallet_id'
+  # has_and_belongs_to_many :charge_transactions, join_table: :transactions_wallets, class_name: 'Transaction'
 
   has_one :crypted_datum, as: :owner
 
@@ -20,17 +17,27 @@ class Wallet < ApplicationRecord
     out_come = load_transactions('sender', 'full_amount')
     in_come = load_transactions('recipient', 'amount')
 
-    out_come + in_come
+    (out_come + in_come).round(2)
+  end
+
+  def all_transactions
+    out_come_send_info.to_a + in_come_send_info.to_a
   end
 
   def load_transactions(directly, sum_field)
     Transaction.joins(:transaction_send_info).where(
-      TransactionSendInfo.table_name => { "#{directly}_id" => id, "#{directly}_type" => self.class.name }
-    ).sum("#{Transaction.table_name}.#{sum_field}")
+      TransactionSendInfo.table_name => { "#{directly}_id" => id, operation: directly_operation(directly) }
+    ).where("#{TransactionSendInfo.table_name}.#{directly}_type like '%Wallet'").sum(
+      "#{Transaction.table_name}.#{sum_field}"
+    )
+  end
+
+  def directly_operation(directly)
+    TransactionSendInfo.operations[directly == 'sender' ? :out_come : :in_come]
   end
 
   def wallet_type_present
-    (type.remove('Wallet')).humanize
+    type.remove('Wallet').humanize
   end
 
   class << self

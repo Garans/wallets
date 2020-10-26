@@ -1,8 +1,27 @@
-version: '3'
+version: '2'
 
 services:
+  postgres-db:
+    image: postgres
+    container_name: postgres-test
+    ports:
+      - "5800:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=interview_db
 
-  vault:
+  postgres-crypted:
+    image: postgres
+    container_name: postgres-crypted
+    ports:
+      - "5900:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=interview_db_crypt
+
+  vault_server:
     image: vault:latest
     volumes:
       - ./vault/config:/vault/config
@@ -17,3 +36,24 @@ services:
     cap_add:
       - IPC_LOCK
     command: vault server -config=/vault/config/vault.json
+
+  project:
+    build:
+      context: .
+    environment:
+      - RAILS_ENV=production
+      - POSTGRES_CRYPT_USER=postgres
+      - POSTGRES_CRYPT_PASSWORD=postgres
+      - POSTGRES_CRYPT_DB=interview_db_crypt
+      - POSTGRES_CRYPT_HOST=postgres-crypted
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=interview_db
+      - POSTGRES_HOST=postgres-db
+      - VAULT_ADDR=http://vault_server:8200
+    ports:
+      - 3000:3000
+    links:
+      - postgres-crypted
+      - postgres-db
+      - vault_server
