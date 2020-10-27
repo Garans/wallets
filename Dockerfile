@@ -1,11 +1,13 @@
 FROM ruby:2.6.1
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-               postgresql-client \
-               nodejs \
+RUN apt-get update
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+        && apt-get install -y nodejs
 
+RUN apt-get install -y --no-install-recommends \
+               postgresql-client \
     && rm -rf /var/lib/apt/lists/*
+
 ENV RAILS_ENV production
 WORKDIR /usr/src/app
 COPY . .

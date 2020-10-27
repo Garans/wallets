@@ -32,10 +32,15 @@ services:
     environment:
       - VAULT_ADDR=http://0.0.0.0:8200
       - VAULT_API_ADDR=http://0.0.0.0:8200
+      - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
       - VAULT_ADDRESS=http://0.0.0.0:8200
+      - VAULT_DEV_TOKEN_ID=42d1dee5-eb6e-102c-8d23-cc3ba875da51
+      - VAULT_TOKEN=6w3CpXn5vChbnpLtBlCJCUxs
     cap_add:
       - IPC_LOCK
-    command: vault server -config=/vault/config/vault.json
+    healthcheck:
+      retries: 5
+    command: vault server -dev -dev-root-token-id="6w3CpXn5vChbnpLtBlCJCUxs"
 
   project:
     build:
@@ -51,6 +56,7 @@ services:
       - POSTGRES_DB=interview_db
       - POSTGRES_HOST=postgres-db
       - VAULT_ADDR=http://vault_server:8200
+      - VAULT_TOKEN=6w3CpXn5vChbnpLtBlCJCUxs
     ports:
       - 3000:3000
     links:

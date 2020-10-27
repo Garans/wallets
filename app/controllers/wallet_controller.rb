@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WalletController < ApplicationController
   before_action :authenticate_user!
   before_action :wallet_set, only: %i[show edit update]
@@ -20,7 +22,7 @@ class WalletController < ApplicationController
     redirect_to wallet_index_path
   rescue StandardError => e
     flash[:error] = e.message
-    render :new
+    redirect_to new_wallet_path(wallet_type: params[:wallet_type])
   end
 
   def update

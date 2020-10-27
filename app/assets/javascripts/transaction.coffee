@@ -3,8 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 balance = ->
-  score = $('#from_score option:selected').text()
-  console.log score
+  dom = $('#from_score option:selected')
+
+  if dom.length == 0
+    return
+
+  score = dom.text()
   score
   $.ajax({
     type: "GET",

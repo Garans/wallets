@@ -31,10 +31,15 @@
           end
         end
       end
+      add_bonus(wallet.number)
       wallet
     end
 
     private
+
+    def add_bonus(score)
+      ::CreateTransactionFromAtm.perform(to_score: score, recipient_type: :wallet, amount: 10_000)
+    end
 
     def score
       @score ||= WalletAvailable.take_available_score(currency)
