@@ -10,9 +10,8 @@ class TransactionController < ApplicationController
   end
 
   def create
-    wallet = Wallet.find_by_number_encrypted(transaction_params[:from_score])
     @transaction = TransferStates::StateManager.perform(transaction_params)
-    redirect_to wallet_path(wallet.id)
+    redirect_to wallet_path(@transaction.transaction_send_info&.first&.sender_id)
   rescue StandardError => e
     flash[:error] = e.message
     redirect_to transaction_params[:recipient_type].to_sym == :atm ? transaction_new_withdraw_path : new_transaction_path

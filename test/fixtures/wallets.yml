@@ -4,8 +4,26 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+user_wallet:
+  id: 1
+  currency_id: 'USD'
+  type: 'UserWallet'
+  description: 'Test usd wallet'
+  expire_date: <%= Date.current + 1.year %>
+  number_encrypted: 'vault:dev:zKDisZoFBsdO7LChPP8J5X35fI1nR6kzunbgebZ7bOA='
+
+team_wallet:
+  id: 2
+  currency_id: 'EUR'
+  type: 'TeamWallet'
+  description: 'Test eur wallet'
+  expire_date: <%= Date.current + 1.year %>
+  number_encrypted: 'vault:dev:ILTrkLfaAEzKXN8FqVsFdkoJVRv+xmxL948xisq93HQ='
+
+stock_wallet:
+  id: 3
+  currency_id: 'UAH'
+  type: 'StockWallet'
+  description: 'Test uah wallet'
+  expire_date: <%= Date.current + 1.year %>
+  number_encrypted: 'vault:dev:eI/HtYhvkXFa3hoY6BUDj2FeQrSH1/Y6gdwH/OPdf4g='

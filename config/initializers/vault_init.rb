@@ -19,5 +19,5 @@ Vault::Rails.configure do |vault|
   vault.ssl_verify = false
   # The token to communicate with the Vault server.
   # Default: ENV["VAULT_TOKEN"].
-  vault.token = 's.ndHVVbBJ4Yw9mesJRipOUlD8'
+  vault.token = ENV['VAULT_TOKEN']
 end

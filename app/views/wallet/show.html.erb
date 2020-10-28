@@ -33,8 +33,13 @@
   </thead>
   <tbody>
     <% @wallet.all_transactions.each do |record| %>
+      <% if record.sender.present? %>
+        <% next if record.sender.number == @wallet.number && record.in_come? %>
+      <% end %>
       <tr>
-        <% if @wallet.number == record.sender.number %>
+        <% if record.sender.blank? %>
+          <td>From Atm</td>
+        <% elsif @wallet.number == record&.sender&.number %>
           <td><%= record.sender.number %></td>
         <% else %>
           <td><%= link_to record.sender.number, wallet_path(record.sender.id) %></td>

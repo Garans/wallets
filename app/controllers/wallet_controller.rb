@@ -30,7 +30,7 @@ class WalletController < ApplicationController
     redirect_to wallet_path(id: @wallet.id)
   rescue StandardError => e
     flash[:error] = e.message
-    render :edit
+    render :edit, status: 400
   end
 
   def new

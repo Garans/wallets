@@ -4,8 +4,9 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  country: 'Ukraine'
+  country_short_code: 'UA'
+  check_iban_number: 12
+  name: 'The best bank of world'
+  mfo: 308_585

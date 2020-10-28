@@ -32,6 +32,6 @@ class WalletFactory
   end
 
   def validate_keys(type)
-    raise StandardError if %w[user team stock].exclude?(type)
+    raise StandardError.new('Incorrect wallet type') if %w[user team stock].exclude?(type)
   end
 end

@@ -4,8 +4,9 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  id: 1
+  currency_id: 'USD'
+  expire_date: <%= Date.current + 1.year %>
+  status: true
+  number_encrypted: 'vault:dev:8CzITaUWAkFbaY6rTsNaKywRHDASHQLGqyFhq+ic+4g='

@@ -17,6 +17,7 @@ module TransferStates
           @transaction.update(status: Transaction.transaction_statuses[:success])
           params[:parent].update(status: Transaction.transaction_statuses[:success]) if params[:parent].present?
         end
+        @transaction
       end
 
       def builder

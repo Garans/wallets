@@ -38,8 +38,6 @@ services:
       - VAULT_TOKEN=6w3CpXn5vChbnpLtBlCJCUxs
     cap_add:
       - IPC_LOCK
-    healthcheck:
-      retries: 5
     command: vault server -dev -dev-root-token-id="6w3CpXn5vChbnpLtBlCJCUxs"
 
   project:

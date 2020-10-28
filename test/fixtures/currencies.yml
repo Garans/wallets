@@ -4,8 +4,18 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+uah:
+  id: 'UAH'
+  symbol_icon: '₴'
+  is_base: false
 # column: value
 #
-two: {}
-# column: value
+eur:
+  id: 'EUR'
+  symbol_icon: '€'
+  is_base: false
+
+usd:
+  id: 'USD'
+  symbol_icon: '$'
+  is_base: true

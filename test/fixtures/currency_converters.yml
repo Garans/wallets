@@ -3,9 +3,33 @@
 # This model initially had no columns defined. If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+uah_usd:
+  first_currency_id: 'UAH'
+  second_currency_id: 'USD'
+  course: 0.0351559
+
+uah_eur:
+  first_currency_id: 'UAH'
+  second_currency_id: 'EUR'
+  course: 0.0300054
+
+usd_eur:
+  first_currency_id: 'USD'
+  second_currency_id: 'EUR'
+  course: 0.853495
+
+usd_uah:
+  first_currency_id: 'USD'
+  second_currency_id: 'UAH'
+  course: 28.4448
+
+eur_usd:
+  first_currency_id: 'EUR'
+  second_currency_id: 'USD'
+  course: 1.17165
+
+eur_uah:
+  first_currency_id: 'EUR'
+  second_currency_id: 'UAH'
+  course: 33.3274

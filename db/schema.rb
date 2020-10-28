@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(version: 2020_10_26_092606) do
     t.string "currency_id"
     t.string "type"
     t.string "description"
-    t.float "funds"
     t.date "expire_date"
     t.string "number_encrypted"
     t.datetime "created_at", null: false

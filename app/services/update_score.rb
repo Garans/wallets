@@ -14,7 +14,7 @@ class UpdateScore
   end
 
   def call
-    raise StandardError, validator.errors.full_messages.join(', ') unless validates!
+    raise StandardError.new(validator.errors.full_messages.join(', ')) unless validates!
 
     wallet.class.transaction do
       wallet.description = params[:description]
